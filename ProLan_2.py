@@ -24,7 +24,7 @@ def onpick(event):
 
         if derive == "error" or equation == "error":
             print("-" * 150)
-            return "Невозможно построить касательую"
+            return "Невозможно построить касательную"
 
         if x0 < 0:
             x0 = "(0" + str(x0) + ")"
@@ -58,7 +58,14 @@ def OPN(a):
                 string_numbers.append("(")
                 func = ""
 
-            if len(string_symbol) == 0 or a[i] == "(":
+            if len(string_symbol) == 0 and len(string_numbers) == 0:
+                string_symbol.append(a[i])
+
+            elif len(string_symbol) == 0:
+                string_numbers.append("(")
+                string_symbol.append(a[i])
+
+            elif a[i] == "(":
                 string_symbol.append(a[i])
 
             elif a[i] == ")":
@@ -67,7 +74,7 @@ def OPN(a):
                         string_symbol.pop(k)
                         break
                     x = string_symbol.pop()
-                    if x in operations:
+                    if x in der_signs:
                         string_numbers.append(")")
                     string_numbers.append(x)
 
@@ -75,10 +82,11 @@ def OPN(a):
                 for k in range(len(string_symbol) - 1, -1, -1):
                     if string_symbol[k] in "(*/+-":
                         string_symbol.append(a[i])
+                        string_numbers.append("(")
                         break
                     else:
                         x = string_symbol.pop()
-                        if x in operations:
+                        if x in der_signs:
                             string_numbers.append(")")
                         string_numbers.append(x)
                         if len(string_symbol) == 0:
@@ -88,10 +96,11 @@ def OPN(a):
                 for k in range(len(string_symbol) - 1, -1, -1):
                     if string_symbol[k] in "(+-":
                         string_symbol.append(a[i])
+                        string_numbers.append("(")
                         break
                     else:
                         x = string_symbol.pop()
-                        if x in operations:
+                        if x in der_signs:
                             string_numbers.append(")")
                         string_numbers.append(x)
                         if len(string_symbol) == 0:
@@ -101,10 +110,11 @@ def OPN(a):
                 for k in range(len(string_symbol) - 1, -1, -1):
                     if string_symbol[k] in "(+-":
                         string_symbol.append(a[i])
+                        string_numbers.append("(")
                         break
                     else:
                         x = string_symbol.pop()
-                        if x in operations:
+                        if x in der_signs:
                             string_numbers.append(")")
                         string_numbers.append(x)
                         if len(string_symbol) == 0:
@@ -114,10 +124,11 @@ def OPN(a):
                 for k in range(len(string_symbol) - 1, -1, -1):
                     if string_symbol[k] in "(":
                         string_symbol.append(a[i])
+                        string_numbers.append("(")
                         break
                     else:
                         x = string_symbol.pop()
-                        if x in operations:
+                        if x in der_signs:
                             string_numbers.append(")")
                         string_numbers.append(x)
                         if len(string_symbol) == 0:
@@ -127,10 +138,11 @@ def OPN(a):
                 for k in range(len(string_symbol) - 1, -1, -1):
                     if string_symbol[k] in "(":
                         string_symbol.append(a[i])
+                        string_numbers.append("(")
                         break
                     else:
                         x = string_symbol.pop()
-                        if x in operations:
+                        if x in der_signs:
                             string_numbers.append(")")
                         string_numbers.append(x)
                         if len(string_symbol) == 0:
@@ -147,7 +159,7 @@ def OPN(a):
 
     for i in range(len(string_symbol) - 1, -1, -1):
         x = string_symbol.pop()
-        if x in operations:
+        if x in der_signs:
             string_numbers.append(")")
         string_numbers.append(x)
 
@@ -438,7 +450,7 @@ print("Обработанное выражение: ", a)
 print("-" * 150)
 
 opn = OPN(a)
-print("Обратная польская нотация: ", opn[0])
+print("Обратная польская нотация: ", opn[1])
 print("-" * 150)
 
 key = int(input("Введите 1 - вычислить выражение\n"
