@@ -92,6 +92,9 @@ def OPN(a):
                         if len(string_symbol) == 0:
                             string_symbol.append(a[i])
 
+                    if k == 0:
+                        string_numbers.append("(")
+
             elif a[i] == "*":
                 for k in range(len(string_symbol) - 1, -1, -1):
                     if string_symbol[k] in "(+-":
@@ -105,6 +108,9 @@ def OPN(a):
                         string_numbers.append(x)
                         if len(string_symbol) == 0:
                             string_symbol.append(a[i])
+
+                    if k == 0:
+                        string_numbers.append("(")
 
             elif a[i] == "/":
                 for k in range(len(string_symbol) - 1, -1, -1):
@@ -120,6 +126,9 @@ def OPN(a):
                         if len(string_symbol) == 0:
                             string_symbol.append(a[i])
 
+                    if k == 0:
+                        string_numbers.append("(")
+
             elif a[i] == "+":
                 for k in range(len(string_symbol) - 1, -1, -1):
                     if string_symbol[k] in "(":
@@ -134,6 +143,9 @@ def OPN(a):
                         if len(string_symbol) == 0:
                             string_symbol.append(a[i])
 
+                    if k == 0:
+                        string_numbers.append("(")
+
             else:
                 for k in range(len(string_symbol) - 1, -1, -1):
                     if string_symbol[k] in "(":
@@ -147,6 +159,9 @@ def OPN(a):
                         string_numbers.append(x)
                         if len(string_symbol) == 0:
                             string_symbol.append(a[i])
+
+                    if k == 0:
+                        string_numbers.append("(")
 
         elif a[i] in [str(k) for k in range(0, 10)] or a[i] == "." or a[i] == "x":
             num += a[i]
